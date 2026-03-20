@@ -1,27 +1,18 @@
-name: Hello World Workflow
+name: PR Workflow
 
 on:
   pull_request:
     types: [opened]
 
-jobs:
-  hello-world-job:
-    runs-on: ubuntu-latest
+permissions:
+  pull-requests: write
 
+jobs:
+  example-job:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Say Hello
-        run: echo "Hello, World! 🎉"
-
-      - name: Comment on PR
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: "Hello 👋 Thanks for opening this pull request! 🚀"
-            })
+        run: echo "Hello, this PR workflow is running!"
